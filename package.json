@@ -74,5 +74,10 @@
     "*.{js,json,css,scss,md,ts,html}": [
       "yarn lint --uncommitted"
     ]
-  }
+  },
+  "description": "simple to do application ",
+  "main": "index.js",
+  "repository": "https://github.com/MohammedALREAI/todo_0.git",
+  "author": "Mohammed Al-Reai <mhamad.aa1997.aa@gmail.com>",
+  "license": "MIT"
 }
