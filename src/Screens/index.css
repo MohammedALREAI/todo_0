@@ -1,7 +1,7 @@
 .inner-container{
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   height: 100%;
@@ -25,7 +25,7 @@
 }
 
 .add-task-input{
-  width: 70%;
+  width: 100%;
   height: 40px;
   border-radius: 21px;
   text-indent: 20px;
@@ -45,10 +45,32 @@
 
 .items-section{
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   margin-top: 30px;
   overflow-y: auto;
   width: 100%;
+}
+
+.input_span{
+  width: 70%;
+  display: flex;
+  justify-content:flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.input_span span{
+  height: 30%;
+  border-radius: 1px solid rgb(211, 22, 22);
+}
+
+.span_loading{
+  text-align: center;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 22px;
+font-weight: bold;
+color:rgb(211, 22, 22);
 }

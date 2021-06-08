@@ -1,7 +1,6 @@
 import './index.css'
 import React from 'react'
 import Home from './Screens/home'
-import AllList from './Component/AllList'
 
 export default class App extends React.Component {
     render() {
@@ -9,7 +8,6 @@ export default class App extends React.Component {
             <main>
                 <div className="container">
                     <Home />
-                    <AllList />
                 </div>
             </main>
         )

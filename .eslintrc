@@ -9,7 +9,8 @@
       "no-unused-vars": "off",
       "@typescript-eslint/ban-types": "off",
       "no-multiple-empty-lines": [2, {"max": 99999, "maxEOF": 0}],
-
+      "space-infix-ops": "off",
+      "@typescript-eslint/space-infix-ops": ["error", { "int32Hint": false }],
       "no-empty-function": "off",
       "no-async-promise-executor": ["off"],
       "no-empty-pattern": ["off"],
