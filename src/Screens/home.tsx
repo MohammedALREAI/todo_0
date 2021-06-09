@@ -1,55 +1,58 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from '../Component/Button/Button'
 import './index.css'
 import { v4 as uuid } from 'uuid'
 import axios from 'axios'
-import ListItem from '../Component/ListItem/ListItem'
+import { ListItem } from '../Component/ListItem/ListItem'
 
 
 type Todo = {
     id: string;
     title: string;
-}
+};
 export type TTodo = Array<Todo>;
 
-interface IState {
-    value: string;
-    error: string;
-    list: TTodo;
-}
-
-export default class Home extends React.Component<{}, IState> {
-    state = {
-        value: '',
-        error: '',
-        list: [],
-    };
-
-    onChangeEvent = (e: React.FormEvent<HTMLInputElement>): void => {
-        this.setState({ value: e.currentTarget.value })
-    };
-
-    handleAddEvent = (): void => {
-        if (this.state.value) {
-            this.setState({
-                error: '',
-                list: [{ id: uuid(), title: this.state.value }, ...this.state.list],
-            })
-        } else {
-            this.setState({ error: 'please add some todo' })
-        }
-    };
 
 
 
-    async componentDidMount() {
-        const { data } = await axios.get<TTodo>('https://jsonplaceholder.typicode.com/todos/')
-        this.setState({
-            list: data as TTodo,
-        })
+
+const home = () => {
+    const [value, setValue] = useState<string>('')
+    const [list, setList] = useState<TTodo>([])
+    const [error, setError] = useState<string>('')
+
+
+    const onChangeEvent = (e: React.FormEvent<HTMLInputElement>): void => {
+        setValue(String(e.currentTarget.value))
     }
 
-    render() {
+    const handleAddEvent = (): void => {
+        if (value) {
+            setList(
+
+                [{ id: uuid(), title: value }, ...list],
+            )
+        } else {
+            setError('please add some todo')
+        }
+    }
+
+
+
+    useEffect(() => {
+            async function fetchMyAPI() {
+                try {
+                    const { data } = await axios.get<TTodo>('https://jsonplaceholder.typicode.com/todos/')
+
+                    setList((data as TTodo).splice(0, 30))
+                } catch (e) {
+                throw new Error(`there are some issiue ${e}`)
+                }
+            }
+            fetchMyAPI()
+    }, [])
+
+
         return (
             <>
                 <div className="inner-container">
@@ -58,37 +61,42 @@ export default class Home extends React.Component<{}, IState> {
                         <div className="input_span">
                             <input
                                 name="add_value"
-                                value={this.state.value}
-                                onChange={this.onChangeEvent}
+                                value={value}
+                                onChange={onChangeEvent}
                                 className="add-task-input"
                                 type="text"
                                 placeholder="enter the to do list"
                             />
-                            {this.state.error && <span> please submit data</span>}
+                            {error && <span> please submit data</span>}
                         </div>
-                        <Button text="Add" handleEventAction={this.handleAddEvent} />
+                        <Button text="Add" handleEventAction={handleAddEvent} />
                     </div>
                 </div>
                 <div className="items-section">
-                    {((this.state.list)as TTodo).length > 0
-                        ? ((this.state.list)as TTodo).map(({ id, title }) => {
+                    {(list as TTodo).length > 0
+? (
+                        (list as TTodo).map(({ id, title }) => {
                             return (
                                 <ListItem
-                                    id={'' + id}
+                                    id={String(id)}
                                     key={String(id)}
                                     todo={title}
                                     handleDeleteAction={() => {
-                                        const data = ((this.state.list)as TTodo).filter(x => String(x.id) !== id)
-                                        this.setState({
-                                            list: data,
-                                        })
+                                        console.log(`${id}`)
+                                        const data = (list as TTodo).filter((x) => `${x.id}` !== `${id}`)
+                                        setList(data)
                                     }}
                                 />
                             )
                         })
- : <span className="span_loading">loading ....</span>}
+                    )
+: (
+                        <span className="span_loading">loading ....</span>
+                    )}
                 </div>
             </>
         )
     }
-}
+
+
+    export default home
