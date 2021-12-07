@@ -1,3 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 * {
   margin: 0;
   box-sizing: border-box;
@@ -12,9 +16,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   margin: 0px;
   width: 100%;
-  max-width: 1920px;
-  min-height: 100vh;
-  background: linear-gradient(189.77deg, #7135d8 14.69%, #542acc 85.31%);
 }
 
 code {
@@ -23,16 +24,23 @@ code {
 }
 
 
-main {
-  margin: 0px auto;
+
+
+/* input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+} */
+
+
+.react-select {
+  margin: 1rem;
+  position: absolute;
+  width: 10rem;
 }
 
-.container{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 20px;
-  margin: 0px auto;
-  max-width: 1140px;
+.react-select
+  .react-select__control--is-focused.react-select__control--menu-is-open {
+  border-color: red;
+  box-shadow: 0 0 10px 1px pink;
 }

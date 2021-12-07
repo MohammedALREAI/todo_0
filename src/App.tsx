@@ -1,15 +1,8 @@
-import './index.css'
 import React from 'react'
-import Home from './Screens/home'
+import { IndexForm } from './Component'
 
 export default class App extends React.Component {
     render() {
-        return (
-            <main>
-                <div className="container">
-                    <Home />
-                </div>
-            </main>
-        )
+        return <IndexForm />
     }
 }
